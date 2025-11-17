@@ -1,0 +1,12 @@
+{{- if not (lookup "v1" "PersistentVolumeClaim" .Release.Namespace "mysql-pvc") }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.mysql.storage }}
+{{- end }}
